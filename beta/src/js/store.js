@@ -1,6 +1,6 @@
 
+import { createStore } from 'framework7';
 
-var createStore = Framework7.createStore;
 const store = createStore({
   state: {
     products: [
@@ -32,4 +32,4 @@ const store = createStore({
     },
   },
 })
-
+export default store;

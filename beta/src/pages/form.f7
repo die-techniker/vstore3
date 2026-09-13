@@ -1,8 +1,14 @@
-<div class="page" data-name="settings">
+<template>
+<div class="page" data-name="form">
   <div class="navbar">
     <div class="navbar-bg"></div>
     <div class="navbar-inner sliding">
-      <div class="title">Settings</div>
+      <div class="left">
+        <a href="#" class="link back">
+          <i class="icon icon-back"></i>
+        </a>
+      </div>
+      <div class="title">Form</div>
     </div>
   </div>
   <div class="page-content">
@@ -232,3 +238,9 @@
     </div>
   </div>
 </div>
+</template>
+<script>
+export default () => {
+  return $render;
+};
+</script>

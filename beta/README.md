@@ -14,15 +14,77 @@ Framework7 app created with following options:
   "name": "VStore",
   "framework": "core",
   "template": "tabs",
-  "bundler": false,
-  "cssPreProcessor": false,
+  "bundler": "vite",
+  "cssPreProcessor": "less",
   "theming": {
     "customColor": true,
-    "color": "#001eff",
+    "color": "#003cff",
     "darkMode": false,
     "iconFonts": true
   },
-  "customBuild": false
+  "customBuild": true,
+  "customBuildConfig": {
+    "rtl": false,
+    "darkTheme": true,
+    "lightTheme": true,
+    "themes": [
+      "ios"
+    ],
+    "components": [
+      "dialog",
+      "popup",
+      "login-screen",
+      "popover",
+      "actions",
+      "sheet",
+      "toast",
+      "preloader",
+      "progressbar",
+      "sortable",
+      "swipeout",
+      "accordion",
+      "contacts-list",
+      "virtual-list",
+      "list-index",
+      "timeline",
+      "tabs",
+      "panel",
+      "card",
+      "chip",
+      "form",
+      "input",
+      "checkbox",
+      "radio",
+      "toggle",
+      "range",
+      "stepper",
+      "smart-select",
+      "grid",
+      "calendar",
+      "picker",
+      "infinite-scroll",
+      "pull-to-refresh",
+      "data-table",
+      "fab",
+      "searchbar",
+      "messages",
+      "messagebar",
+      "swiper",
+      "photo-browser",
+      "notification",
+      "autocomplete",
+      "tooltip",
+      "gauge",
+      "skeleton",
+      "color-picker",
+      "treeview",
+      "text-editor",
+      "area-chart",
+      "pie-chart",
+      "breadcrumbs",
+      "typography"
+    ]
+  }
 }
 ```
 
@@ -36,15 +98,16 @@ npm install
 ## NPM Scripts
 
 * 🔥 `start` - run development server
-* 🔧 `serve` - run development server
+* 🔧 `dev` - run development server
+* 🔧 `build` - build web app for production
+
+## Vite
+
+There is a [Vite](https://vitejs.dev) bundler setup. It compiles and bundles all "front-end" resources. You should work only with files located in `/src` folder. Vite config located in `vite.config.js`.
+
 ## PWA
 
 This is a PWA. Don't forget to check what is inside of your `service-worker.js`. It is also recommended that you disable service worker (or enable "Update on reload") in browser dev tools during development.
-
-
-
-
-
 ## Assets
 
 Assets (icons, splash screens) source images located in `assets-src` folder. To generate your own icons and splash screen images, you will need to replace all assets in this directory with your own images (pay attention to image size and format), and run the following command in the project directory:

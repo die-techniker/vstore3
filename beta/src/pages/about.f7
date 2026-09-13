@@ -1,3 +1,4 @@
+<template>
 <div class="page" data-name="about">
   <div class="navbar">
     <div class="navbar-bg"></div>
@@ -25,3 +26,9 @@
     </div>
   </div>
 </div>
+</template>
+<script>
+export default () => {
+  return $render;
+};
+</script>

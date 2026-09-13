@@ -1,33 +1,44 @@
 
+import HomePage from '../pages/home.f7';
+import AboutPage from '../pages/about.f7';
+import FormPage from '../pages/form.f7';
+import CatalogPage from '../pages/catalog.f7';
+import ProductPage from '../pages/product.f7';
+import SettingsPage from '../pages/settings.f7';
+
+import DynamicRoutePage from '../pages/dynamic-route.f7';
+import RequestAndLoad from '../pages/request-and-load.f7';
+import NotFoundPage from '../pages/404.f7';
+
 var routes = [
   {
     path: '/',
-    url: './index.html',
+    component: HomePage,
   },
   {
     path: '/about/',
-    url: './pages/about.html',
+    component: AboutPage,
   },
   {
     path: '/form/',
-    url: './pages/form.html',
+    component: FormPage,
   },
   {
     path: '/catalog/',
-    componentUrl: './pages/catalog.html',
+    component: CatalogPage,
   },
   {
     path: '/product/:id/',
-    componentUrl: './pages/product.html',
+    component: ProductPage,
   },
   {
     path: '/settings/',
-    url: './pages/settings.html',
+    component: SettingsPage,
   },
 
   {
     path: '/dynamic-route/blog/:blogId/post/:postId/',
-    componentUrl: './pages/dynamic-route.html',
+    component: DynamicRoutePage,
   },
   {
     path: '/request-and-load/user/:userId/',
@@ -65,7 +76,7 @@ var routes = [
         // Resolve route to load page
         resolve(
           {
-            componentUrl: './pages/request-and-load.html',
+            component: RequestAndLoad,
           },
           {
             props: {
@@ -76,9 +87,10 @@ var routes = [
       }, 1000);
     },
   },
-  // Default route (404 page). MUST BE THE LAST
   {
     path: '(.*)',
-    url: './pages/404.html',
+    component: NotFoundPage,
   },
 ];
+
+export default routes;
