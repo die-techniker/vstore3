@@ -1,0 +1,19 @@
+{
+  "cwd": "/home/viktor-chiarcos/GitHub/vstore3/beta",
+  "type": [
+    "web",
+    "pwa"
+  ],
+  "name": "VStore",
+  "framework": "core",
+  "template": "tabs",
+  "bundler": false,
+  "cssPreProcessor": false,
+  "theming": {
+    "customColor": true,
+    "color": "#001eff",
+    "darkMode": false,
+    "iconFonts": true
+  },
+  "customBuild": false
+}
