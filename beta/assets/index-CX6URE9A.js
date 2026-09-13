@@ -966,11 +966,11 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
           <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner">
-              <div class="title">Left Panel</div>
+              <div class="title">Linkes Menü</div>
             </div>
           </div>
           <div class="page-content">
-            <div class="block">Left panel content goes here</div>
+            <div class="block">Noch kein Inhalt verfügbar</div>
           </div>
         </div>
       </div>
@@ -982,11 +982,11 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
           <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner">
-              <div class="title">Right Panel</div>
+              <div class="title">Rechtes Menü</div>
             </div>
           </div>
           <div class="page-content">
-            <div class="block">Right panel content goes here</div>
+            <div class="block">Noch kein Inhalt verfügbar</div>
           </div>
         </div>
       </div>
@@ -1006,12 +1006,12 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
             <a href="#view-catalog" class="tab-link">
               <i class="icon f7-icons if-not-md">square_list_fill</i>
               <i class="icon material-icons if-md">view_list</i>
-              <span class="tabbar-label">Catalog</span>
+              <span class="tabbar-label">Apps</span>
             </a>
             <a href="#view-settings" class="tab-link">
               <i class="icon f7-icons if-not-md">gear</i>
               <i class="icon material-icons if-md">settings</i>
-              <span class="tabbar-label">Settings</span>
+              <span class="tabbar-label">Anleitungen</span>
             </a>
           </div>
         </div>
