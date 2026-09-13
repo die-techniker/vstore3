@@ -1001,7 +1001,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
             <a href="#view-home" class="tab-link tab-link-active">
               <i class="icon f7-icons if-not-md">house_fill</i>
               <i class="icon material-icons if-md">home</i>
-              <span class="tabbar-label">Home</span>
+              <span class="tabbar-label">Startseite</span>
             </a>
             <a href="#view-catalog" class="tab-link">
               <i class="icon f7-icons if-not-md">square_list_fill</i>
