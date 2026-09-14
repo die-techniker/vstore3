@@ -951,8 +951,8 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
   </div>
   <div class="page-content">
     <div class="block block-strong inset">
-      <p>Sorry</p>
-      <p>Requested content not found.</p>
+      <p>404. Das ist ein Fehler</p>
+      <p>Der angefragte Inhalt konnte nicht geladen werden!</p>
     </div>
   </div>
 </div>
