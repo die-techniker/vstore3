@@ -281,8 +281,8 @@ Each tab/view may have different layout, different navbar type (dynamic, fixed o
       <div class="block grid grid-cols-2 grid-gap">
         <a href="#" class="button button-fill panel-open" data-panel="left">Left Panel</a>
         <a href="#" class="button button-fill panel-open" data-panel="right">Right Panel</a>
-    	<a href="javascript:klaro.show();" class="button button-round button-outline">Klaro</a>
-      <!-- <a class="button is-success" onclick="return klaro.show();">Change consent settings</a> -->
+    	<!-- <a href="javascript:klaro.show();" class="button button-round button-outline">Klaro</a> -->
+      <a class="button is-success" onclick="return klaro.show();">Change consent settings</a> 
       </div>
 
       <div class="list list-strong inset list-dividers-ios links-list">
@@ -1100,4 +1100,5 @@ Each tab/view may have different layout, different navbar type (dynamic, fixed o
     </div>
 
   </div>
+
 `}}Vd.id=`9ffc726790`,new kd({name:`VStore`,theme:`auto`,colors:{primary:`#007aff`},el:`#app`,component:Vd,store:Bd,routes:zd});
