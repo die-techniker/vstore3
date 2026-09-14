@@ -1041,26 +1041,15 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
           <div class="navbar">
             <div class="navbar-bg"></div>
             <div class="navbar-inner">
-              <div class="title">Herzlich Willkommen zu VStore 3 beta</div>
+              <div class="title">Popup</div>
               <div class="right">
-                <a href="#" class="link popup-close">Ok</a>
+                <a href="#" class="link popup-close">Close</a>
               </div>
             </div>
           </div>
           <div class="page-content">
             <div class="block">
-            	<p>Was gibt's neues?</p>
-            </div>
-			<br>
-			<div class="block">
-            	<ul><li>VStore - Jetzt mit Liquid Glass</li></ul>
-            </div>
-			<br>
-			<div class="block">
-            	<p>Infos zur Beta:</p>
-            </div>
-			<div class="block">
-            	<p><b>Aktuelle Beta:</b> VStore 3 Developer Beta</p>
+              <p>Popup content goes here.</p>
             </div>
           </div>
         </div>
