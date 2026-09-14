@@ -290,7 +290,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
             <a href="/dynamic-route/blog/45/post/125/?foo=bar#about">Dynamic (Component) Route</a>
           </li>
           <li>
-            <a href="/load-something-that-doesnt-exist/">Default Route (404)</a>
+            <a href="/seite-nicht-gefunden/">Default Route (404)</a>
           </li>
           <li>
             <a href="/request-and-load/user/123456/">Request Data & Load</a>
@@ -1003,7 +1003,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
               <i class="icon material-icons if-md">home</i>
               <span class="tabbar-label">Startseite</span>
             </a>
-            <a href="#view-catalog" class="tab-link">
+            <a href="#apps" class="tab-link">
               <i class="icon f7-icons if-not-md">square_list_fill</i>
               <i class="icon material-icons if-md">view_list</i>
               <span class="tabbar-label">Apps</span>
@@ -1023,7 +1023,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
       </div>
 
       <!-- Catalog View -->
-      <div id="view-catalog" class="view view-init tab" data-name="catalog" data-url="/catalog/">
+      <div id="apps" class="view view-init tab" data-name="catalog" data-url="/catalog/">
         <!-- Catalog page will be loaded here dynamically from /catalog/ route -->
       </div>
 
