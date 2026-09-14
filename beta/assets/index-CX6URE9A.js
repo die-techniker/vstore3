@@ -998,7 +998,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
       <div class="toolbar tabbar toolbar-bottom tabbar-icons">
         <div class="toolbar-inner">
           <div class="toolbar-pane">
-            <a href="#view-home" class="tab-link tab-link-active">
+            <a href="#startseite" class="tab-link tab-link-active">
               <i class="icon f7-icons if-not-md">house_fill</i>
               <i class="icon material-icons if-md">home</i>
               <span class="tabbar-label">Startseite</span>
@@ -1008,9 +1008,9 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
               <i class="icon material-icons if-md">view_list</i>
               <span class="tabbar-label">Apps</span>
             </a>
-            <a href="#view-settings" class="tab-link">
+            <a href="#anleitungen" class="tab-link">
               <i class="icon f7-icons if-not-md">gear</i>
-              <i class="icon material-icons if-md">settings</i>
+              <i class="icon material-icons if-md">book</i>
               <span class="tabbar-label">Anleitungen</span>
             </a>
           </div>
@@ -1018,7 +1018,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
       </div>
 
       <!-- Your main view/tab, should have "view-main" class. It also has "tab-active" class -->
-      <div id="view-home" class="view view-main view-init tab tab-active" data-url="/">
+      <div id="startseite" class="view view-main view-init tab tab-active" data-url="/">
         <!-- Home page will be loaded here dynamically from / route -->
       </div>
 
@@ -1028,7 +1028,7 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
       </div>
 
       <!-- Settings View -->
-      <div id="view-settings" class="view view-init tab" data-name="settings" data-url="/settings/">
+      <div id="anleitungen" class="view view-init tab" data-name="settings" data-url="/settings/">
         <!-- Settings page will be loaded here dynamically from /settings/ route -->
       </div>
     </div>
