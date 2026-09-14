@@ -248,10 +248,9 @@ var e=Object.defineProperty,t=(t,n)=>{let r={};for(var i in t)e(r,i,{get:t[i],en
     <!-- Scrollable page content-->
     <div class="page-content">
       <div class="block">
-        <p>This is an example of tabs-layout application. The main point of such tabbed layout is that each tab contains independent view with its own routing and navigation.</p>
+This is an example of tabs-layout application. The main point of such tabbed layout is that each tab contains independent view with its own routing and navigation.
 
-        <p>Each tab/view may have different layout, different navbar type (dynamic, fixed or static) or without navbar like this tab.</p>
-      </div>
+Each tab/view may have different layout, different navbar type (dynamic, fixed or static) or without navbar like this tab.   	</div>
       <div class="block-title">Navigation</div>
       <div class="list list-strong inset list-dividers-ios">
         <ul>
