@@ -14,7 +14,7 @@
   
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+  <link class="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" href="icons/favicon.png">
   
   <!-- CSS Stylesheets -->
@@ -25,7 +25,7 @@
   <!-- Das Haupt-App-Element für Framework7 -->
   <div id="app">
 
-    <!-- Framework7 Sheet-Modal (Muss INNERHALB von #app liegen) -->
+    <!-- Framework7 Sheet-Modal (Das Banner liegt sicher im #app-Container) -->
     <div class="sheet-modal sheet-modal-bottom cookie-consent-sheet" style="height: auto;">
       <div class="sheet-modal-inner">
         <div class="page-content">
@@ -43,11 +43,51 @@
 
   </div> <!-- /#app -->
   
-
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
+  <!-- 1. Zuerst die js-cookie Bibliothek laden -->
+  <script src="https://jsdelivr.net"></script>
   
-
+  <!-- 2. Framework7 Core Skript laden (Ihre bestehende Datei) -->
   <script type="module" crossorigin src="./assets/index-CX6URE9A.js"></script>
+
+  <!-- 3. DIE CONSENT-LOGIK (Wartet, bis die App geladen ist und steuert das Banner) -->
+  <script type="module">
+    // Wir warten, bis das Fenster komplett geladen ist
+    window.addEventListener('load', function() {
+      
+      // Framework7 Core speichert die App-Instanz meistens global ab.
+      // Wir versuchen die Instanz über die typischen F7-Variablen zu greifen:
+      var f7App = window.app || window.f7 || (window.Framework7 && window.Framework7.instance);
+
+      if (f7App && window.Cookies) {
+        // Status auslesen
+        var consentStatus = window.Cookies.get('cookie-consent');
+
+        // Wenn kein Cookie existiert, das Banner öffnen
+        if (!consentStatus) {
+          f7App.sheet.open('.cookie-consent-sheet', true);
+        }
+
+        // Klick-Event: Alle erlauben
+        f7App.$('#accept-cookies').on('click', function () {
+          window.Cookies.set('cookie-consent', 'all', { expires: 365, secure: true, sameSite: 'strict' });
+          console.log('Alle Cookies akzeptiert.');
+        });
+
+        // Klick-Event: Nur essenzielle
+        f7App.$('#reject-cookies').on('click', function () {
+          window.Cookies.set('cookie-consent', 'essential', { expires: 365, secure: true, sameSite: 'strict' });
+          console.log('Nur essenzielle Cookies.');
+        });
+        
+      } else {
+        // Falls F7 die Instanz nicht global teilt, nutzen wir einen Fallback über das DOM7-Event
+        console.log("Suche App-Instanz über DOM...");
+        document.addEventListener('app:init', function () {
+          // Falls Ihre index-CX6URE9A.js ein Event wirft
+        });
+      }
+    });
+  </script>
   
 </body>
 </html>
