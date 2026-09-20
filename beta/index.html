@@ -25,9 +25,8 @@
   <!-- Das Haupt-App-Element für Framework7 -->
   <div id="app">
 
-    <!-- COOKIE BANNER: 'modal-in' sorgt dafür, dass das Banner standardmäßig OFFEN startet -->
-    <!-- 'display: block' erzwingt die Sichtbarkeit beim ersten Laden -->
-    <div id="cookie-banner" class="sheet-modal sheet-modal-bottom cookie-consent-sheet modal-in" style="height: auto; display: none;">
+    <!-- Framework7 Sheet-Modal (Das Banner liegt sicher im #app-Container) -->
+    <div class="sheet-modal sheet-modal-bottom cookie-consent-sheet modal-in" style="height: auto;">
       <div class="sheet-modal-inner">
         <div class="page-content">
           <div class="block">
@@ -47,35 +46,54 @@
   <!-- 1. Zuerst die js-cookie Bibliothek korrekt laden -->
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
 
-  <!-- 2. Reine Standard-JavaScript Logik (Läuft unabhängig von Framework7) -->
+  <!-- 2. Robuster Observer (Wartet, bis F7 das HTML generiert hat) -->
   <script>
-    // Sobald die Seite geladen ist, prüfen wir den Cookie-Status
-    window.addEventListener('DOMContentLoaded', function () {
-      var banner = document.getElementById('cookie-banner');
-      
-      if (window.Cookies) {
-        var consentStatus = window.Cookies.get('cookie-consent');
+    (function() {
+      // Funktion, die das Banner steuert, sobald es im DOM existiert
+      function initCookieBanner() {
+        // Wir suchen das F7 Sheet anhand seiner Klasse
+        var banner = document.querySelector('.cookie-consent-sheet');
+        var acceptBtn = document.getElementById('accept-cookies');
+        var rejectBtn = document.getElementById('reject-cookies');
 
-        // Wenn noch KEIN Cookie gesetzt wurde, blenden wir das Banner ein
-        if (!consentStatus) {
-          banner.style.display = 'block';
+        if (!banner || !acceptBtn || !rejectBtn) return false;
+
+        if (window.Cookies) {
+          var consentStatus = window.Cookies.get('cookie-consent');
+
+          // Wenn bereits ein Cookie da ist, löschen/verstecken wir das Banner sofort
+          if (consentStatus) {
+            banner.remove();
+          } else {
+            // Wenn kein Cookie da ist, stellen wir sicher, dass es sichtbar bleibt
+            banner.style.setProperty('display', 'block', 'important');
+          }
+
+          // Klick-Event: Alle erlauben
+          acceptBtn.addEventListener('click', function () {
+            window.Cookies.set('cookie-consent', 'all', { expires: 365, secure: true, sameSite: 'strict' });
+            banner.remove();
+          });
+
+          // Klick-Event: Nur essenzielle
+          rejectBtn.addEventListener('click', function () {
+            window.Cookies.set('cookie-consent', 'essential', { expires: 365, secure: true, sameSite: 'strict' });
+            banner.remove();
+          });
         }
-
-        // Klick auf "Alle erlauben"
-        document.getElementById('accept-cookies').addEventListener('click', function () {
-          window.Cookies.set('cookie-consent', 'all', { expires: 365, secure: true, sameSite: 'strict' });
-          console.log('Alle Cookies akzeptiert.');
-          banner.style.display = 'none'; // Banner ausblenden
-        });
-
-        // Klick auf "Nur essenzielle"
-        document.getElementById('reject-cookies').addEventListener('click', function () {
-          window.Cookies.set('cookie-consent', 'essential', { expires: 365, secure: true, sameSite: 'strict' });
-          console.log('Nur essenzielle Cookies.');
-          banner.style.display = 'none'; // Banner ausblenden
-        });
+        return true;
       }
-    });
+
+      // Ein Observer überwacht die Seite und schaut, wann F7 das HTML einfügt
+      var observer = new MutationObserver(function(mutations, obs) {
+        if (initCookieBanner()) {
+          obs.disconnect(); // Stoppen, sobald das Banner erfolgreich eingerichtet wurde
+        }
+      });
+
+      // Überwachung starten
+      observer.observe(document.body, { childList: true, subtree: true });
+    })();
   </script>
   
   <!-- 3. Framework7 Core Skript laden (Ihre compilierte App-Datei) -->
