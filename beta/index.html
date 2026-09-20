@@ -25,8 +25,9 @@
   <!-- Das Haupt-App-Element für Framework7 -->
   <div id="app">
 
-    <!-- Framework7 Sheet-Modal (Das Banner liegt sicher im #app-Container) -->
-    <div class="sheet-modal sheet-modal-bottom cookie-consent-sheet" style="height: auto;">
+    <!-- COOKIE BANNER: 'modal-in' sorgt dafür, dass das Banner standardmäßig OFFEN startet -->
+    <!-- 'display: block' erzwingt die Sichtbarkeit beim ersten Laden -->
+    <div id="cookie-banner" class="sheet-modal sheet-modal-bottom cookie-consent-sheet modal-in" style="height: auto; display: none;">
       <div class="sheet-modal-inner">
         <div class="page-content">
           <div class="block">
@@ -46,31 +47,32 @@
   <!-- 1. Zuerst die js-cookie Bibliothek korrekt laden -->
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
 
-  <!-- 2. Reines Inline-Skript, das auf den Start von Framework7 wartet -->
+  <!-- 2. Reine Standard-JavaScript Logik (Läuft unabhängig von Framework7) -->
   <script>
-    // Framework7 feuert beim Starten automatisch ein globales Event am document ab
-    document.addEventListener('framework7:init', function (e) {
-      // Das Event liefert uns die isolierte App-Instanz direkt frei Haus!
-      var f7App = e.detail;
-
-      if (f7App && window.Cookies) {
+    // Sobald die Seite geladen ist, prüfen wir den Cookie-Status
+    window.addEventListener('DOMContentLoaded', function () {
+      var banner = document.getElementById('cookie-banner');
+      
+      if (window.Cookies) {
         var consentStatus = window.Cookies.get('cookie-consent');
 
-        // Wenn kein Cookie existiert, das Banner öffnen
+        // Wenn noch KEIN Cookie gesetzt wurde, blenden wir das Banner ein
         if (!consentStatus) {
-          f7App.sheet.open('.cookie-consent-sheet', true);
+          banner.style.display = 'block';
         }
 
-        // Klick-Event für "Alle erlauben"
-        f7App.$('#accept-cookies').on('click', function () {
+        // Klick auf "Alle erlauben"
+        document.getElementById('accept-cookies').addEventListener('click', function () {
           window.Cookies.set('cookie-consent', 'all', { expires: 365, secure: true, sameSite: 'strict' });
           console.log('Alle Cookies akzeptiert.');
+          banner.style.display = 'none'; // Banner ausblenden
         });
 
-        // Klick-Event für "Nur essenzielle"
-        f7App.$('#reject-cookies').on('click', function () {
+        // Klick auf "Nur essenzielle"
+        document.getElementById('reject-cookies').addEventListener('click', function () {
           window.Cookies.set('cookie-consent', 'essential', { expires: 365, secure: true, sameSite: 'strict' });
           console.log('Nur essenzielle Cookies.');
+          banner.style.display = 'none'; // Banner ausblenden
         });
       }
     });
