@@ -282,7 +282,7 @@ Each tab/view may have different layout, different navbar type (dynamic, fixed o
         <a href="#" class="button button-fill panel-open" data-panel="left">Left Panel</a>
         <a href="#" class="button button-fill panel-open" data-panel="right">Right Panel</a>
     	<!-- <a href="javascript:klaro.show();" class="button button-round button-outline">Klaro</a> -->
-      <a class="button is-success" onclick="window.Cookies.set('cookie-consent', '', { expires: 365, secure: true, sameSite: 'strict' } ; location.reload()">Cookie-Einstellungen</a>  
+      <a class="button is-success" onclick="ReopenBanner()">Cookie-Einstellungen</a>  
 
       </div>
 

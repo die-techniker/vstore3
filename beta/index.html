@@ -129,6 +129,11 @@
       });
       observer.observe(document.body, { childList: true, subtree: true });
     })();
+
+    function ReopenBanner(){
+      window.Cookies.set('cookie-consent', '', { expires: 365, secure: true, sameSite: 'strict' };
+      location.reload();
+    };
   </script>
   
   <!-- 3. Framework7 Core Skript laden (Ihre compilierte App-Datei) -->
