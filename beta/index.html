@@ -19,79 +19,114 @@
   
   <!-- CSS Stylesheets -->
   <link rel="stylesheet" crossorigin href="./assets/index-CMh6gLwM.css">
+
+  <!-- Kleiner CSS-Style, damit das Banner exakt wie ein Framework7-Sheet aussieht, aber autark bleibt -->
+  <style>
+    .custom-cookie-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      background: #ffffff;
+      box-shadow: 0px -2px 10px rgba(0, 0, 0, 0.15);
+      z-index: 99999 !important;
+      padding: 16px;
+      box-sizing: border-box;
+      font-family: -apple-system, SF Pro Text, SF UI Text, Helvetica Neue, Helvetica, Arial, sans-serif;
+      border-radius: 12px 12px 0 0;
+    }
+    .custom-cookie-banner p {
+      color: #333;
+      font-size: 14px;
+      margin: 0 0 16px 0;
+      line-height: 1.4;
+    }
+    .custom-cookie-banner .banner-buttons {
+      display: flex;
+      gap: 10px;
+    }
+    .custom-cookie-banner button {
+      flex: 1;
+      border: none;
+      padding: 12px;
+      border-radius: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: background 0.2s;
+    }
+    .custom-cookie-banner .btn-reject {
+      background: #e0e0e0;
+      color: #333;
+    }
+    .custom-cookie-banner .btn-accept {
+      background: #4caf50;
+      color: #fff;
+    }
+    /* Schutz vor Überlagerung auf Smartphones mit Home-Bar (iOS) */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      .custom-cookie-banner {
+        padding-bottom: calc(16px + env(safe-area-inset-bottom));
+      }
+    }
+  </style>
 </head>
 <body>
 
-  <!-- Das Haupt-App-Element für Framework7 -->
-  <div id="app">
+  <!-- Das Haupt-App-Element für Framework7 (Bleibt unberührt) -->
+  <div id="app"></div>
 
-    <!-- Framework7 Sheet-Modal (Das Banner liegt sicher im #app-Container) -->
-    <div class="sheet-modal sheet-modal-bottom cookie-consent-sheet modal-in" style="height: auto;">
-      <div class="sheet-modal-inner">
-        <div class="page-content">
-          <div class="block">
-            <p style="margin-top: 0;"><b>Cookie-Einstellungen</b></p>
-            <p>Wir nutzen Cookies, um die App-Funktionalität zu gewährleisten.</p>
-            <div class="row">
-              <button id="reject-cookies" class="col button button-fill button-neutral sheet-close">Nur essenzielle</button>
-              <button id="accept-cookies" class="col button button-fill color-green sheet-close">Alle erlauben</button>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- COOKIE BANNER: Liegt AUSSERHALB von #app, damit F7 es nicht automatisch ausblenden kann -->
+  <div id="custom-cookie-banner" class="custom-cookie-banner" style="display: none;">
+    <p><b>Cookie-Einstellungen</b><br>Wir nutzen Cookies, um die App-Funktionalität zu gewährleisten.</p>
+    <div class="banner-buttons">
+      <button id="reject-cookies" class="btn-reject">Nur essenzielle</button>
+      <button id="accept-cookies" class="btn-accept">Alle erlauben</button>
     </div>
-
-  </div> <!-- /#app -->
+  </div>
   
   <!-- 1. Zuerst die js-cookie Bibliothek korrekt laden -->
   <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
 
-  <!-- 2. Robuster Observer (Wartet, bis F7 das HTML generiert hat) -->
+  <!-- 2. Unabhängige Steuerung (Wartet, bis das DOM bereit ist) -->
   <script>
     (function() {
-      // Funktion, die das Banner steuert, sobald es im DOM existiert
-      function initCookieBanner() {
-        // Wir suchen das F7 Sheet anhand seiner Klasse
-        var banner = document.querySelector('.cookie-consent-sheet');
+      function checkConsent() {
+        var banner = document.getElementById('custom-cookie-banner');
         var acceptBtn = document.getElementById('accept-cookies');
         var rejectBtn = document.getElementById('reject-cookies');
 
-        if (!banner || !acceptBtn || !rejectBtn) return false;
+        if (!banner || !acceptBtn || !rejectBtn || !window.Cookies) return;
 
-        if (window.Cookies) {
-          var consentStatus = window.Cookies.get('cookie-consent');
+        var consentStatus = window.Cookies.get('cookie-consent');
 
-          // Wenn bereits ein Cookie da ist, löschen/verstecken wir das Banner sofort
-          if (consentStatus) {
-            banner.remove();
-          } else {
-            // Wenn kein Cookie da ist, stellen wir sicher, dass es sichtbar bleibt
-            banner.style.setProperty('display', 'block', 'important');
-          }
-
-          // Klick-Event: Alle erlauben
-          acceptBtn.addEventListener('click', function () {
-            window.Cookies.set('cookie-consent', 'all', { expires: 365, secure: true, sameSite: 'strict' });
-            banner.remove();
-          });
-
-          // Klick-Event: Nur essenzielle
-          rejectBtn.addEventListener('click', function () {
-            window.Cookies.set('cookie-consent', 'essential', { expires: 365, secure: true, sameSite: 'strict' });
-            banner.remove();
-          });
+        // Wenn kein Cookie da ist, Banner DAUERHAFT anzeigen
+        if (!consentStatus) {
+          banner.style.display = 'block';
         }
-        return true;
+
+        // Klick-Event: Alle erlauben
+        acceptBtn.addEventListener('click', function () {
+          window.Cookies.set('cookie-consent', 'all', { expires: 365, secure: true, sameSite: 'strict' });
+          banner.style.display = 'none';
+          console.log('Alle Cookies akzeptiert.');
+        });
+
+        // Klick-Event: Nur essenzielle
+        rejectBtn.addEventListener('click', function () {
+          window.Cookies.set('cookie-consent', 'essential', { expires: 365, secure: true, sameSite: 'strict' });
+          banner.style.display = 'none';
+          console.log('Nur essenzielle Cookies.');
+        });
       }
 
-      // Ein Observer überwacht die Seite und schaut, wann F7 das HTML einfügt
+      // Falls die Seite extrem schnell lädt, nutzen wir einen Observer als Sicherheitsnetz
       var observer = new MutationObserver(function(mutations, obs) {
-        if (initCookieBanner()) {
-          obs.disconnect(); // Stoppen, sobald das Banner erfolgreich eingerichtet wurde
+        if (document.getElementById('custom-cookie-banner')) {
+          checkConsent();
+          obs.disconnect();
         }
       });
-
-      // Überwachung starten
       observer.observe(document.body, { childList: true, subtree: true });
     })();
   </script>
