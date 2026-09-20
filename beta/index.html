@@ -3,14 +3,7 @@
 <head>
   <meta charset="utf-8">
 
-  <!--
-  Customize this policy to fit your own app's needs. For more guidance, please refer to the docs:
-      https://cordova.apache.org/docs/en/latest/
-  Some notes:
-    * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-    * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-      * Enable inline JS: add 'unsafe-inline' to default-src
-  -->
+  <!-- Cordova Content-Security-Policy -->
   <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: content:">
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, viewport-fit=cover">
 
@@ -24,19 +17,37 @@
   <link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
   <link rel="icon" href="icons/favicon.png">
   
-  
-  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
-
-
-  <!-- built styles file will be auto injected -->
-  <script type="module" crossorigin src="./assets/index-CX6URE9A.js"></script>
+  <!-- CSS Stylesheets -->
   <link rel="stylesheet" crossorigin href="./assets/index-CMh6gLwM.css">
-  
-
-
 </head>
 <body>
-  <div id="app"></div>
+
+  <!-- Das Haupt-App-Element für Framework7 -->
+  <div id="app">
+
+    <!-- Framework7 Sheet-Modal (Muss INNERHALB von #app liegen) -->
+    <div class="sheet-modal sheet-modal-bottom cookie-consent-sheet" style="height: auto;">
+      <div class="sheet-modal-inner">
+        <div class="page-content">
+          <div class="block">
+            <p style="margin-top: 0;"><b>Cookie-Einstellungen</b></p>
+            <p>Wir nutzen Cookies, um die App-Funktionalität zu gewährleisten.</p>
+            <div class="row">
+              <button id="reject-cookies" class="col button button-fill button-neutral sheet-close">Nur essenzielle</button>
+              <button id="accept-cookies" class="col button button-fill color-green sheet-close">Alle erlauben</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div> <!-- /#app -->
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/js-cookie@3.0.8/dist/js.cookie.min.js"></script>
+  
+
+  <script type="module" crossorigin src="./assets/index-CX6URE9A.js"></script>
   
 </body>
 </html>
